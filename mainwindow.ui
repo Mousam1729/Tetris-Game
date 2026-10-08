@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1020</width>
+    <height>740</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Tetris - Computer Graphics Lab Project</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+QMainWindow {
+    background-color: #0b0f14;
+}
+
+QWidget {
+    color: #e2e8f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13px;
+}
+
+QGroupBox {
+    background-color: #121720;
+    border: 1px solid #243042;
+    border-radius: 8px;
+    margin-top: 24px;
+    padding: 12px;
+    font-weight: bold;
+    color: #38bdf8;
+    font-size: 13px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    left: 12px;
+    padding: 0 6px;
+    background-color: #121720;
+}
+
+QFrame.card {
+    background-color: #121720;
+    border: 1px solid #243042;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+QLabel {
+    color: #cbd5e1;
+}
+
+QLabel.statTitle {
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+QLabel.statValue {
+    color: #38bdf8;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+QPushButton {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 9px 14px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+QPushButton:hover {
+    background-color: #3b82f6;
+}
+
+QPushButton:pressed {
+    background-color: #1d4ed8;
+}
+
+QPushButton:disabled {
+    background-color: #1e293b;
+    color: #64748b;
+}
+
+QPushButton#btnRestart {
+    background-color: #dc2626;
+}
+
+QPushButton#btnRestart:hover {
+    background-color: #ef4444;
+}
+
+QPushButton#btnPause {
+    background-color: #d97706;
+}
+
+QPushButton#btnPause:hover {
+    background-color: #f59e0b;
+}
+
+QPushButton#btnResetHigh {
+    background-color: #334155;
+    font-size: 11px;
+    padding: 6px 10px;
+}
+
+QPushButton#btnResetHigh:hover {
+    background-color: #475569;
+}
+
+QSpinBox {
+    background-color: #1a2230;
+    color: #f1f5f9;
+    border: 1px solid #334155;
+    border-radius: 5px;
+    padding: 4px 8px;
+    font-size: 13px;
+}
+
+QComboBox {
+    background-color: #1a2230;
+    color: #f1f5f9;
+    border: 1px solid #334155;
+    border-radius: 5px;
+    padding: 4px 8px;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #1a2230;
+    color: #f1f5f9;
+    selection-background-color: #2563eb;
+}
+
+QCheckBox {
+    color: #cbd5e1;
+    spacing: 8px;
+}
+
+QCheckBox::indicator {
+    width: 16px;
+    height: 16px;
+    background-color: #1a2230;
+    border: 1px solid #334155;
+    border-radius: 3px;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #2563eb;
+    border-color: #3b82f6;
+}
+
+QStatusBar {
+    background-color: #0d121a;
+    color: #94a3b8;
+    border-top: 1px solid #1e293b;
+}
+   </string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="mainHorizontalLayout">
+    <property name="spacing">
+     <number>14</number>
+    </property>
+    <property name="leftMargin">
+     <number>14</number>
+    </property>
+    <property name="topMargin">
+     <number>14</number>
+    </property>
+    <property name="rightMargin">
+     <number>14</number>
+    </property>
+    <property name="bottomMargin">
+     <number>14</number>
+    </property>
+
+    <!-- LEFT SIDE PANEL -->
+    <item>
+     <widget class="QWidget" name="leftPanel" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>220</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>240</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="leftLayout">
+       <property name="spacing">
+        <number>12</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+
+       <!-- HOLD PIECE BOX -->
+       <item>
+        <widget class="QGroupBox" name="groupHold">
+         <property name="title">
+          <string>HOLD [C / SHIFT]</string>
+         </property>
+         <layout class="QVBoxLayout" name="holdLayout">
+          <property name="leftMargin">
+           <number>8</number>
+          </property>
+          <property name="topMargin">
+           <number>8</number>
+          </property>
+          <property name="rightMargin">
+           <number>8</number>
+          </property>
+          <property name="bottomMargin">
+           <number>8</number>
+          </property>
+          <item alignment="Qt::AlignCenter">
+           <widget class="PreviewCanvas" name="holdCanvas" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>110</width>
+              <height>110</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- STATS GROUP -->
+       <item>
+        <widget class="QGroupBox" name="groupStats">
+         <property name="title">
+          <string>STATISTICS</string>
+         </property>
+         <layout class="QVBoxLayout" name="statsLayout">
+          <property name="spacing">
+           <number>8</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lblScoreTitle">
+            <property name="text">
+             <string>SCORE</string>
+            </property>
+            <property name="class" stdset="0">
+             <string>statTitle</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblScoreValue">
+            <property name="text">
+             <string>0</string>
+            </property>
+            <property name="class" stdset="0">
+             <string>statValue</string>
+            </property>
+           </widget>
+          </item>
+
+          <item>
+           <widget class="QLabel" name="lblHighScoreTitle">
+            <property name="text">
+             <string>HIGH SCORE</string>
+            </property>
+            <property name="class" stdset="0">
+             <string>statTitle</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblHighScoreValue">
+            <property name="text">
+             <string>0</string>
+            </property>
+            <property name="class" stdset="0">
+             <string>statValue</string>
+            </property>
+           </widget>
+          </item>
+
+          <item>
+           <widget class="QLabel" name="lblLevelTitle">
+            <property name="text">
+             <string>LEVEL</string>
+            </property>
+            <property name="class" stdset="0">
+             <string>statTitle</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblLevelValue">
+            <property name="text">
+             <string>1</string>
+            </property>
+            <property name="class" stdset="0">
+             <string>statValue</string>
+            </property>
+           </widget>
+          </item>
+
+          <item>
+           <widget class="QLabel" name="lblLinesTitle">
+            <property name="text">
+             <string>LINES CLEARED</string>
+            </property>
+            <property name="class" stdset="0">
+             <string>statTitle</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblLinesValue">
+            <property name="text">
+             <string>0</string>
+            </property>
+            <property name="class" stdset="0">
+             <string>statValue</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- CG LAB RASTER COORDINATES -->
+       <item>
+        <widget class="QGroupBox" name="groupRaster">
+         <property name="title">
+          <string>RASTER GRID COORDS</string>
+         </property>
+         <layout class="QVBoxLayout" name="rasterLayout">
+          <property name="spacing">
+           <number>6</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lblMouseGrid">
+            <property name="text">
+             <string>Matrix Cell: (0, 0)</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font-family: Consolas, monospace; color: #a5f3fc;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblMouseCartesian">
+            <property name="text">
+             <string>Cartesian: (0, 0)</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font-family: Consolas, monospace; color: #fde047;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblRasterInfo">
+            <property name="text">
+             <string>Origin (0,0) at Center&#10;Hover cursor to inspect</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: #64748b; font-size: 11px;</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <item>
+        <spacer name="leftVerticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+
+    <!-- CENTER TETRIS BOARD -->
+    <item>
+     <widget class="QWidget" name="centerPanel" native="true">
+      <layout class="QVBoxLayout" name="centerLayout">
+       <property name="spacing">
+        <number>6</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item alignment="Qt::AlignCenter">
+        <widget class="TetrisCanvas" name="tetrisCanvas" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>320</width>
+           <height>600</height>
+          </size>
+         </property>
+         <property name="cursor">
+          <cursorShape>CrossCursor</cursorShape>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+
+    <!-- RIGHT SIDE PANEL -->
+    <item>
+     <widget class="QWidget" name="rightPanel" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>240</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>260</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="rightLayout">
+       <property name="spacing">
+        <number>12</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+
+       <!-- NEXT PIECES BOX -->
+       <item>
+        <widget class="QGroupBox" name="groupNext">
+         <property name="title">
+          <string>NEXT PIECES</string>
+         </property>
+         <layout class="QVBoxLayout" name="nextLayout">
+          <property name="leftMargin">
+           <number>8</number>
+          </property>
+          <property name="topMargin">
+           <number>8</number>
+          </property>
+          <property name="rightMargin">
+           <number>8</number>
+          </property>
+          <property name="bottomMargin">
+           <number>8</number>
+          </property>
+          <item alignment="Qt::AlignCenter">
+           <widget class="PreviewCanvas" name="nextCanvas" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>110</width>
+              <height>180</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- GAME CONTROL BUTTONS -->
+       <item>
+        <widget class="QGroupBox" name="groupActions">
+         <property name="title">
+          <string>GAME CONTROLS</string>
+         </property>
+         <layout class="QVBoxLayout" name="actionsLayout">
+          <property name="spacing">
+           <number>8</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="btnStart">
+            <property name="text">
+             <string>▶ START</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnPause">
+            <property name="text">
+             <string>⏸ PAUSE</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnRestart">
+            <property name="text">
+             <string>🔄 RESTART</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnResetHigh">
+            <property name="text">
+             <string>🏆 Reset High Score</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- CG LAB VISUAL SETTINGS -->
+       <item>
+        <widget class="QGroupBox" name="groupSettings">
+         <property name="title">
+          <string>RASTER OPTIONS</string>
+         </property>
+         <layout class="QVBoxLayout" name="settingsLayout">
+          <property name="spacing">
+           <number>8</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="layoutCellSize">
+            <item>
+             <widget class="QLabel" name="lblCellSize">
+              <property name="text">
+               <string>Cell Size (px):</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinCellSize">
+              <property name="minimum">
+               <number>18</number>
+              </property>
+              <property name="maximum">
+               <number>38</number>
+              </property>
+              <property name="value">
+               <number>28</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkGridLines">
+            <property name="text">
+             <string>Show Raster Grid Lines</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkGhostPiece">
+            <property name="text">
+             <string>Show Ghost Piece</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="layoutStyle">
+            <item>
+             <widget class="QLabel" name="lblStyle">
+              <property name="text">
+               <string>Block Style:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBlockStyle">
+              <item>
+               <property name="text">
+                <string>Beveled 3D</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Classic Flat</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Neon Glow</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- KEYBOARD GUIDE -->
+       <item>
+        <widget class="QGroupBox" name="groupKeys">
+         <property name="title">
+          <string>CONTROLS</string>
+         </property>
+         <layout class="QVBoxLayout" name="keysLayout">
+          <property name="spacing">
+           <number>4</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lblKeys">
+            <property name="text">
+             <string>← / A : Move Left&#10;→ / D : Move Right&#10;↓ / S : Soft Drop&#10;↑ / W / X : Rotate CW&#10;Z / Ctrl : Rotate CCW&#10;Space : Hard Drop&#10;C / Shift : Hold Piece&#10;P / Esc : Pause&#10;R : Restart</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font-family: Consolas, monospace; font-size: 11px; color: #94a3b8; line-height: 140%;</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <item>
+        <spacer name="rightVerticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+
+ <customwidgets>
+  <customwidget>
+   <class>TetrisCanvas</class>
+   <extends>QWidget</extends>
+   <header>tetriscanvas.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PreviewCanvas</class>
+   <extends>QWidget</extends>
+   <header>previewcanvas.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+
+ <resources/>
+ <connections/>
+</ui>
